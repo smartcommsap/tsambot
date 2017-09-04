@@ -66,12 +66,13 @@ request({
 	
    speech = req.body.result && req.body.result.parameters && req.body.result.parameters.PolicyNumber ? req.body.result.parameters.PolicyNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
 	}
+	console.log("Final speech: "+speech);
     return res.json({
         speech: speech,
         displayText: speech,
         source: 'webhook-echo-sample'
     });
-	console.log("Final speech: "+speech);
+	
 });
 restService.listen((process.env.PORT || 8000), function() {
     console.log("Server up and listening");
