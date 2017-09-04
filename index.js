@@ -51,12 +51,9 @@ request({
     form: request_data.data,
     headers: oauth.toHeader(oauth.authorize(request_data))
 }, function(error, response, body) {
-    if (error){	   
-	    console.log(body);
-    }
-	if(!error){
+    if (error) console.error(error);
+	if(!body){
 		speech="Folder created. Please check the CMS.";
-		console.log(body);
 	}
 	
 });
