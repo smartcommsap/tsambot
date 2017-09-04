@@ -1,30 +1,30 @@
-# movies.py
+from flask import Flask, render_template,request,session,redirect,url_for,Response,jsonify
 
-from flask import Flask, render_template
-import requests
-import json
-
-app = Flask(__name__)
+from flask import send_from_directory
 
 
-tasks = [
-    {
-        'id': 1,
-        'title': u'Buy groceries',
-        'description': u'Milk, Cheese, Pizza, Fruit, Tylenol', 
-        'done': False
-    },
-    {
-        'id': 2,
-        'title': u'Learn Python',
-        'description': u'Need to find a good Python tutorial on the web', 
-        'done': False
-    }
-]
+app = Flask(__name__)      
 
-@app.route('/todo/api/v1.0/tasks', methods=['POST'])
-def get_tasks():
-    return jsonify({'tasks': tasks})
+app.secret_key = '1006d5d50a924cbc89ecb5fc9e987652'
+
+
+
+@app.route('/getkeywords', methods = ['GET','POST'])
+def getkeywords():
+    
+    import simplejson as j
+    if request.method=="POST":
+        path=request.form['text']
+        #print path 
+        jso = getKeywordsFromText(path)
+           
+        return jsonify(j.loads(jso))
+        
+        
+    else:
+        return redirect(url_for('home'))
+    
 
 if __name__ == '__main__':
+    #app.run(host= '10.207.60.126',port=5000)
     app.run(debug=True)
