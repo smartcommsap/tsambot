@@ -5,13 +5,13 @@ const bodyParser = require('body-parser');
 
 const restService = express();
 var speech ="outside";
-
+/**
 //added for SC testing
 var OAuth = require('oauth-1.0a');
 var crypto = require('crypto');
 var request = require('request');
 var json = require('json');
-
+**/
 restService.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -22,6 +22,7 @@ restService.post('/echo', function(req, res) {
 	
 	if(req.body.metadata.intentName == "AddFolder")
 	{
+		/**
 	var oauth = new OAuth({
     consumer: {
       key: '6e83adcc-09b3-4514-bb4f-442cfa21c019!TradeDocsThunderhead@sapient.com.trial',
@@ -44,7 +45,7 @@ restService.post('/echo', function(req, res) {
 
 };
 speech="inside";
-/**
+
 request({
     url: request_data.url,
     method: request_data.method,
@@ -64,6 +65,7 @@ request({
     console.log(body);
 });
 **/
+speech="inside";
 	}
 	else{
 		
