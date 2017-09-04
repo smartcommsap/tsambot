@@ -19,10 +19,10 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 restService.post('/echo', function(req, res) {
-	
+/**	
 	if(req.body.metadata.intentName == "AddFolder")
 	{
-		/**
+		
 	var oauth = new OAuth({
     consumer: {
       key: '6e83adcc-09b3-4514-bb4f-442cfa21c019!TradeDocsThunderhead@sapient.com.trial',
@@ -64,13 +64,13 @@ request({
     //data1 = JSON.parse(response);
     console.log(body);
 });
-**/
+
 speech="inside";
 	}
 	else{
-		
+**/		
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.PolicyNumber ? req.body.result.parameters.PolicyNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
-	}
+	//}
     return res.json({
         speech: speech,
         displayText: speech,
