@@ -24,7 +24,7 @@ restService.post('/echo', function(req, res) {
 	{
 		
 	
-		console.log(req.body.result.parameters.ParentID);
+		var speech = "I work";
 
 	}
 	else{
