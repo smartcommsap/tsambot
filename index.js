@@ -22,6 +22,7 @@ restService.post('/echo', function(req, res) {
 
 	if(req.body.result.parameters.NewFolderName)
 	{
+		var speech="Folder created. Please check the CMS.";
 	var oauth = new OAuth({
     consumer: {
       key: '6e83adcc-09b3-4514-bb4f-442cfa21c019!TradeDocsThunderhead@sapient.com.trial',
@@ -53,18 +54,21 @@ request({
 }, function(error, response, body) {
     if (error){ 
 	    console.error(error);
+	    speech = "ERROR";
     }
 	else{
 	
-		var speech="Folder created. Please check the CMS.";
+		
 		console.log("Folder created: "+speech);
 	}
-});
-		console.log("Final speech: "+speech);
+	
+	console.log("Final speech: "+speech);
 	return res.json({
         speech: speech,
         displayText: speech,
         source: 'webhook-echo-sample'
+});
+		
     });
 	}
 	else{
