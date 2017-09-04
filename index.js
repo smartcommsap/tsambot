@@ -57,7 +57,7 @@ request({
 	else{
 	
 		speech="Folder created. Please check the CMS.";
-		console.log("Folder created");
+		console.log("Folder created: "+speech);
 	}
 });
 
