@@ -53,7 +53,7 @@ request({
 }, function(error, response, body) {
     if (error){	    
 	    console.error(error);
-	    speech=error;
+	    speech=body;
     }
 	else{
 		speech="Folder created. Please check the CMS.";
