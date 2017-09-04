@@ -60,13 +60,14 @@ request({
 	
 		
 		console.log("Folder created: "+speech);
-	}
-	
-	console.log("Final speech: "+speech);
+		console.log("Final speech: "+speech);
 	return res.json({
         speech: speech,
         displayText: speech,
         source: 'webhook-echo-sample'
+	}
+	
+	
 });
 		
     });
