@@ -44,6 +44,7 @@ restService.post('/echo', function(req, res) {
     },
 
 };
+console.log(request_data);
 /**		
 request({
     url: request_data.url,
