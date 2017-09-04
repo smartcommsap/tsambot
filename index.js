@@ -10,7 +10,7 @@ var OAuth = require('oauth-1.0a');
 var crypto = require('crypto');
 var request = require('request');
 var json = require('json');
-//var speech = "Something went wrong. Please try again.";
+var speech = "Something went wrong. Please try again.";
 restService.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -21,7 +21,6 @@ restService.post('/echo', function(req, res) {
 
 	if(req.body.result.parameters.NewFolderName)
 	{
-	var speech = "Something went wrong. Please try again.";	
 	var oauth = new OAuth({
     consumer: {
       key: '6e83adcc-09b3-4514-bb4f-442cfa21c019!TradeDocsThunderhead@sapient.com.trial',
@@ -56,6 +55,7 @@ request({
     }
 	else{
 		speech="Folder created. Please check the CMS.";
+		console.log(body);
 	}
 	
 });
@@ -63,7 +63,7 @@ request({
 	}
 	else{
 	
-   var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.PolicyNumber ? req.body.result.parameters.PolicyNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
+   speech = req.body.result && req.body.result.parameters && req.body.result.parameters.PolicyNumber ? req.body.result.parameters.PolicyNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
 	}
     return res.json({
         speech: speech,
