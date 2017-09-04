@@ -44,7 +44,7 @@ restService.post('/echo', function(req, res) {
     },
 
 };
-console.log("inside " + request_data);
+console.log(req.body.result.parameters.ParentID);
 /**		
 request({
     url: request_data.url,
@@ -57,7 +57,6 @@ request({
     console.log(body);
 });
 **/
-speech="inside";
 	}
 	else{
 	
