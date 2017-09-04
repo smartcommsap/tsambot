@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const restService = express();
-var speech ="outside";
+//var speech ="outside";
 /**
 //added for SC testing
 var OAuth = require('oauth-1.0a');
@@ -69,7 +69,7 @@ speech="inside";
 	}
 	else{
 		
-    speech = req.body.result && req.body.result.parameters && req.body.result.parameters.PolicyNumber ? req.body.result.parameters.PolicyNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
+    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.PolicyNumber ? req.body.result.parameters.PolicyNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
 	}
     return res.json({
         speech: speech,
