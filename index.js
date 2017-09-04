@@ -61,7 +61,7 @@ speech="inside";
 	else{
 	
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.PolicyNumber ? req.body.result.parameters.PolicyNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
-	//}
+	}
     return res.json({
         speech: speech,
         displayText: speech,
