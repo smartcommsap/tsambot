@@ -10,7 +10,7 @@ var OAuth = require('oauth-1.0a');
 var crypto = require('crypto');
 var request = require('request');
 var json = require('json');
-
+var speech = "No response";
 restService.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -51,16 +51,21 @@ request({
     form: request_data.data,
     headers: oauth.toHeader(oauth.authorize(request_data))
 }, function(error, response, body) {
-    if (error) console.error(error);
-    //data1 = JSON.parse(response);
-    console.log(body);
+    if (error){	    
+	    console.error(error);
+	    speech=error;
+    }
+	else{
+		speech="Folder created. Please check the CMS.";
+	}
+	
+ console.log(body);
 });
 
-var speech="Folder created";
 	}
 	else{
 	
-    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.PolicyNumber ? req.body.result.parameters.PolicyNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
+   speech = req.body.result && req.body.result.parameters && req.body.result.parameters.PolicyNumber ? req.body.result.parameters.PolicyNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
 	}
     return res.json({
         speech: speech,
