@@ -51,17 +51,17 @@ request({
     form: request_data.data,
     headers: oauth.toHeader(oauth.authorize(request_data))
 }, function(error, response, body) {
-    if (error){	    
+    //if (error){	    
 	var xml2js = require('xml2js');
 	var parser = new xml2js.Parser();
 	parser.parseString(body, function (err, result) {
 		speech = result['errorinfo']['msg'];
 		console.log("Some error: " +speech);
 });
-    }
-	else{
-		speech="Folder created. Please check the CMS.";
-	}
+    //}
+	//else{
+		//speech="Folder created. Please check the CMS.";
+	//}
 	
 });
 
