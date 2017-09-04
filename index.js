@@ -68,7 +68,6 @@ speech="inside";
         displayText: speech,
         source: 'webhook-echo-sample'
     });
-});
 restService.listen((process.env.PORT || 8000), function() {
     console.log("Server up and listening");
 });
