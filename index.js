@@ -25,9 +25,9 @@ restService.post('/echo', function(req, res) {
 	
     var speech = req.body.result.parameters.PolicyNumber+" is available. We will fetch it for you.";
 	}
-	else
-	{
-	var speech = "In else loop";
+	if(req.body.result.parameters.NewFolderName)
+	   {
+	   var speech = "In else loop";
 	}
     return res.json({
         speech: speech,
