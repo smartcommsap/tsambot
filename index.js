@@ -71,6 +71,7 @@ request({
         displayText: speech,
         source: 'webhook-echo-sample'
     });
+	console.log("Final speech: "+speech);
 });
 restService.listen((process.env.PORT || 8000), function() {
     console.log("Server up and listening");
