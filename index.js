@@ -1,3 +1,22 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Marketplace
+Explore
+ @PrateepN
+ Sign out
+ Watch 0
+  Star 0
+  Fork 0 PrateepN/SampleEcho
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Settings Insights 
+Branch: master Find file Copy pathSampleEcho/index.js
+e3939a5  11 minutes ago
+@PrateepN PrateepN Update index.js
+1 contributor
+RawBlameHistory     
+83 lines (69 sloc)  2.06 KB
 'use strict';
 
 const express = require('express');
@@ -52,15 +71,7 @@ request({
     form: request_data.data,
     headers: oauth.toHeader(oauth.authorize(request_data))
 }, function(error, response, body) {
-    if (error)
-	{
-		console.error(error);
-		speech = error;
-	}
-	else
-	{
-		speech = "Folder is created";
-	}
+    if (error) console.error(error);
     //data1 = JSON.parse(response);
     console.log(body);
 });
