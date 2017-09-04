@@ -10,7 +10,7 @@ var OAuth = require('oauth-1.0a');
 var crypto = require('crypto');
 var request = require('request');
 var json = require('json');
-var speech = "Something went wrong. Please try again.";
+//var speech = "Something went wrong. Please try again.";
 restService.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -53,9 +53,10 @@ request({
 }, function(error, response, body) {
     if (error){	   
 	    console.log(error);
+	    var speech = "Something went wrong. Please try again.";
     }
 	else{
-		speech="Folder created. Please check the CMS.";
+		var speech="Folder created. Please check the CMS.";
 	}
 	
 });
@@ -63,7 +64,7 @@ request({
 	}
 	if(req.body.result.parameters.PolicyNumber){
 	
-   speech = req.body.result && req.body.result.parameters && req.body.result.parameters.PolicyNumber ? req.body.result.parameters.PolicyNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
+   var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.PolicyNumber ? req.body.result.parameters.PolicyNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
 	}
     return res.json({
         speech: speech,
