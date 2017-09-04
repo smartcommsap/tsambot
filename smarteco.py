@@ -1,6 +1,6 @@
 # movies.py
 
-from flask import Flask, render_template, requests
+from flask import Flask, render_template
 import requests
 import json
 
@@ -22,7 +22,7 @@ tasks = [
     }
 ]
 
-@app.route('/todo/api/v1.0/tasks', methods=['GET'])
+@app.route('/todo/api/v1.0/tasks', methods=['POST'])
 def get_tasks():
     return jsonify({'tasks': tasks})
 
