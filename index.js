@@ -54,6 +54,7 @@ request({
 }, function(error, response, body) {
     if (error){ 
 	    console.error(error);
+	    console.log(body);
 	    speech = "ERROR";
     }
 	else{
