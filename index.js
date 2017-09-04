@@ -52,8 +52,12 @@ request({
     headers: oauth.toHeader(oauth.authorize(request_data))
 }, function(error, response, body) {
     if (error){	    
-	    console.error(error);
-	    speech=body;
+	var xml2js = require('xml2js');
+	var parser = new xml2js.Parser();
+	parser.parseString(body, function (err, result) {
+		speech = result['errorinfo']['msg'];
+		console.log(body);
+});
     }
 	else{
 		speech="Folder created. Please check the CMS.";
