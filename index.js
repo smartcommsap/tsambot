@@ -21,7 +21,7 @@ restService.post('/echo', function(req, res) {
 
 	if(req.body.result.parameters.NewFolderName)
 	{
-		
+	var speech = "Something went wrong. Please try again.";	
 	var oauth = new OAuth({
     consumer: {
       key: '6e83adcc-09b3-4514-bb4f-442cfa21c019!TradeDocsThunderhead@sapient.com.trial',
@@ -52,17 +52,16 @@ request({
     headers: oauth.toHeader(oauth.authorize(request_data))
 }, function(error, response, body) {
     if (error){	   
-	    console.log(error);
-	    var speech = "Something went wrong. Please try again.";
+	    console.log(body);
     }
 	else{
-		var speech="Folder created. Please check the CMS.";
+		speech="Folder created. Please check the CMS.";
 	}
 	
 });
 
 	}
-	if(req.body.result.parameters.PolicyNumber){
+	else{
 	
    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.PolicyNumber ? req.body.result.parameters.PolicyNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
 	}
