@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const restService = express();
+var read = require('read-metadata');
 
 restService.use(bodyParser.urlencoded({
     extended: true
@@ -12,15 +13,13 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 restService.post('/echo', function(req, res) {
-    console.log(req.body.metadata);
-    if(req.body.metadata.intentName == "AddFolder")
-    {
-        var speech = "Inside";
-    }
-    else
-    {
+    
+    read(req, function(err, data){
+    console.log(data);
+});
+    
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.PolicyNumber ? req.body.result.parameters.PolicyNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
-    }
+    
     return res.json({
         speech: speech,
         displayText: speech,
