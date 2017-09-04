@@ -63,7 +63,6 @@ request({
 		speech="Folder created. Please check the CMS.";
 	}
 	
- console.log(body);
 });
 
 	}
