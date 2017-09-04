@@ -24,7 +24,7 @@ restService.post('/echo', function(req, res) {
 	{
 		
 	
-		var speech = "I work";
+		var speech = 'I work';
 
 	}
 	else{
