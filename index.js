@@ -10,7 +10,7 @@ var OAuth = require('oauth-1.0a');
 var crypto = require('crypto');
 var request = require('request');
 var json = require('json');
-var speech = "No response";
+var speech = "Something went wrong. Please try again.";
 restService.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -56,7 +56,7 @@ request({
 	var parser = new xml2js.Parser();
 	parser.parseString(body, function (err, result) {
 		speech = result['errorinfo']['msg'];
-		console.log(speech);
+		console.log("Some error: " +speech);
 });
     }
 	else{
