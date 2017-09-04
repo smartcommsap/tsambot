@@ -18,7 +18,7 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 restService.post('/echo', function(req, res) {
-	var speech = "Something went wrong. Please try again.";
+	//var speech = "Something went wrong. Please try again.";
 
 	if(req.body.result.parameters.NewFolderName)
 	{
@@ -56,7 +56,7 @@ request({
     }
 	else{
 	
-		speech="Folder created. Please check the CMS.";
+		var speech="Folder created. Please check the CMS.";
 		console.log("Folder created: "+speech);
 	}
 });
@@ -69,7 +69,7 @@ request({
 	}
 	else{
 	
-   speech = req.body.result && req.body.result.parameters && req.body.result.parameters.PolicyNumber ? req.body.result.parameters.PolicyNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
+   var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.PolicyNumber ? req.body.result.parameters.PolicyNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
 	
 	console.log("Final speech: "+speech);
     return res.json({
