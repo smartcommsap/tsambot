@@ -10,7 +10,7 @@ var OAuth = require('oauth-1.0a');
 var crypto = require('crypto');
 var request = require('request');
 var json = require('json');
-var speech = "Something went wrong. Please try again.";
+
 restService.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -18,6 +18,7 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 restService.post('/echo', function(req, res) {
+	var speech = "Something went wrong. Please try again.";
 
 	if(req.body.result.parameters.NewFolderName)
 	{
@@ -53,7 +54,7 @@ request({
     if (error){	   
 	    console.log(body);
     }
-	else{
+	if(!error){
 		speech="Folder created. Please check the CMS.";
 		console.log(body);
 	}
