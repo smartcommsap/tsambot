@@ -44,8 +44,7 @@ restService.post('/echo', function(req, res) {
     },
 
 };
-speech="inside";
-
+/**		
 request({
     url: request_data.url,
     method: request_data.method,
@@ -56,7 +55,7 @@ request({
     //data1 = JSON.parse(response);
     console.log(body);
 });
-
+**/
 speech="inside";
 	}
 	else{
