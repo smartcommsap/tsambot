@@ -52,9 +52,9 @@ request({
     headers: oauth.toHeader(oauth.authorize(request_data))
 }, function(error, response, body) {
     if (error) console.error(error);
-	if(!body){
+	
 		speech="Folder created. Please check the CMS.";
-	}
+
 	
 });
 
