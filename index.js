@@ -56,7 +56,7 @@ request({
 	var parser = new xml2js.Parser();
 	parser.parseString(body, function (err, result) {
 		speech = result['errorinfo']['msg'];
-		console.log(body);
+		console.log(speech);
 });
     }
 	else{
