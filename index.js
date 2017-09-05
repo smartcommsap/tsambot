@@ -57,6 +57,8 @@ request({
 	    
     }
 	else{
+		if(body)
+		{
 		var xml2js = require('xml2js');
   		var parser = new xml2js.Parser();
   		parser.parseString(body, function (err, result) {
@@ -66,7 +68,7 @@ request({
 			speech=locspeech;
 		}		
 });
-
+		}
 		console.log("Final speech: "+speech);
 		console.log(body);
 	return res.json({
