@@ -54,14 +54,12 @@ request({
 }, function(error, response, body) {
     if (error){ 
 	    console.error(error);
-	    console.log(body);
-	    speech = "ERROR";
+	    
     }
 	else{
-	
-		
-		console.log("Folder created: "+speech);
+
 		console.log("Final speech: "+speech);
+		console.log(body);
 	return res.json({
         speech: speech,
         displayText: speech,
