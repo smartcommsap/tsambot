@@ -57,6 +57,14 @@ request({
 	    
     }
 	else{
+		var xml2js = require('xml2js');
+  		var parser = new xml2js.Parser();
+  		parser.parseString(body, function (err, result) {
+  		var locspeech = result['errorinfo']['msg'];
+  		if (locspeech)
+		{
+			speech=locspeech;
+		}		
 
 		console.log("Final speech: "+speech);
 		console.log(body);
