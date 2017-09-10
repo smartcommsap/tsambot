@@ -62,10 +62,7 @@ request({
         displayText: speech,
         source: 'webhook-echo-sample'
 	
-	});
-	}
-
-		
+	});		
     });
 	}
 	else{
