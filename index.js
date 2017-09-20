@@ -62,15 +62,15 @@ restService.post('/echo', function(req, res) {
 		var transactionDataPart2,transactionDataPart4="";
 		var transactionDataPart3="<CustomerName>John Doe</CustomerName><AgencyName>RTG Consultants</AgencyName><AgencyPhoneNo>123-564-232</AgencyPhoneNo><Transactiontype>";
 		var transactionDataPart5="</Transactiontype></SCBOTRequest>";
-		console.log("Truncated "+req.body.result.parameters.DocNumber.toString().substr(0,2).toUpperCase());
-		if(req.body.result.parameters.DocNumber.toString().substr(0,2).toUpperCase()=="POL")
+		console.log("Truncated "+req.body.result.parameters.DocNumber.toString().substr(0,3).toUpperCase());
+		if(req.body.result.parameters.DocNumber.toString().substr(0,3).toUpperCase()=="POL")
 		{
 			console.log("Inside Generate Document POL URL"+req_url);
 			transactionType="Policy";
 			transactionDataPart2="<PolicyNumber>"+req.body.result.parameters.DocNumber+"</PolicyNumber><PolicyPremium>123.45</PolicyPremium>";
 			transactionDataPart4=transactionType;
 		}
-		else if(req.body.result.parameters.DocNumber.toString().substr(0,2).toUpperCase()=="QUO")
+		else if(req.body.result.parameters.DocNumber.toString().substr(0,3).toUpperCase()=="QUO")
 		{
 			console.log("Inside Generate Document QUO URL"+req_url);
 			transactionType="Quote";
