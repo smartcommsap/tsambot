@@ -52,19 +52,17 @@ request({
     form: request_data.data,
     headers: oauth.toHeader(oauth.authorize(request_data))
 }, function(error, response, body) {
-    if (error) console.error(error);		
-		console.log("Final speech: "+speech);
+   if (error) console.error(error);
+		speech = body;
 		console.log(body);
 	return res.json({
         speech: speech,
         displayText: speech,
         source: 'webhook-echo-sample'
 	
-	});
-	}
-
-		
+	});		
     });
+});
 	}
 	else{
 	
