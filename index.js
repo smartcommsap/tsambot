@@ -101,12 +101,15 @@ restService.post('/echo', function(req, res) {
 		}
 		
 	}
-
+var request_vars =  {	
+	url: req_url,
+	method: req_method,	
+};
 request({
     url: req_url,
     method: req_method,
     json: data,
-    headers: oauth.toHeader(oauth.authorize(request_data))
+    headers: oauth.toHeader(oauth.authorize(request_vars))
 }, function(error, response, body) {
     if (error) console.error(error);
 		speech = body;
