@@ -62,13 +62,13 @@ restService.post('/echo', function(req, res) {
 		var transactionDataPart2,transactionDataPart4="";
 		var transactionDataPart3="<CustomerName>John Doe</CustomerName><AgencyName>RTG Consultants</AgencyName><AgencyPhoneNo>123-564-232</AgencyPhoneNo><Transactiontype>";
 		var transactionDataPart5="</Transactiontype></SCBOTRequest>";
-		if(DocNumber.substr(0,2).toUpperCase()=="POL")
+		if(req.body.result.parameters.DocNumber.substr(0,2).toUpperCase()=="POL")
 		{
 			transactionType="Policy";
 			transactionDataPart2="<PolicyNumber>"+req.body.result.parameters.DocNumber+"</PolicyNumber><PolicyPremium>123.45</PolicyPremium>";
 			transactionDataPart4=transactionType;
 		}
-		else if(DocNumber.substr(0,2).toUpperCase()=="QUO")
+		else if(req.body.result.parameters.DocNumber.substr(0,2).toUpperCase()=="QUO")
 		{
 			transactionType="Quote";
 			transactionDataPart2="<QuoteNumber>"+req.body.result.parameters.DocNumber+"</QuoteNumber><QuotePremium>5643.34</QuotePremium>";
