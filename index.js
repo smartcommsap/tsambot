@@ -44,6 +44,7 @@ restService.post('/echo', function(req, res) {
 	//Parameters for Create Folder
 	if(req.body.result.parameters.NewFolderName && req.body.result.parameters.ParentID)
 	{
+		console.log("Inside Create Folder");
 		apiMethod="CreateFolder";
 		speech="Folder created. Please check the CMS.";
 		req_url="https://na4.smartcommunications.cloud/one/oauth1/cms/v4/folders";	
@@ -55,6 +56,7 @@ restService.post('/echo', function(req, res) {
 	//Parameters for Generate Document
 	else if(req.body.result.parameters.DocNumber)
 	{
+		console.log("Inside Generate Document");
 		var transactionType = "";
 		var transactionDataPart1="<?xml version=\"1.0\" encoding=\"utf-8\"?><SCBOTRequest>";
 		var transactionDataPart2,transactionDataPart4="";
