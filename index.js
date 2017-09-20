@@ -130,7 +130,6 @@ request({
     method: req_method,
     json: data,
     headers: oauth.toHeader(oauth.authorize(request_vars))
-	console.log("Inside request: " + new Date());
 }, function(error, response, body) {
     if (error) console.error(error);
 		speech = body;
