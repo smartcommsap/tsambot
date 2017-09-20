@@ -52,23 +52,7 @@ request({
     form: request_data.data,
     headers: oauth.toHeader(oauth.authorize(request_data))
 }, function(error, response, body) {
-    if (error){ 
-	    console.error(error);
-	    
-    }
-	else{
-		if(body)
-		{
-		var xml2js = require('xml2js');
-  		var parser = new xml2js.Parser();
-  		parser.parseString(body, function (err, result) {
-  		var locspeech = result['errorinfo']['msg'];
-  		if (locspeech)
-		{
-			speech=locspeech;
-		}		
-});
-		}
+    if (error) console.error(error);		
 		console.log("Final speech: "+speech);
 		console.log(body);
 	return res.json({
