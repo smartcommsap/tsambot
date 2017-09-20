@@ -34,14 +34,16 @@ restService.post('/echo', function(req, res) {
   });
   
   var request_data = {
+    /**
     url: 'https://na4.smartcommunications.cloud/one/oauth1/cms/v4/folders',
-	//url: 'https://na4.smartcommunications.cloud/one/',
-	//url: 'https://na4.smartcommunications.cloud/one/',
     method: 'POST',
     data: {
       name: req.body.result.parameters.NewFolderName,
 	  parentId: req.body.result.parameters.ParentID
     },
+    **/
+	url: 'https://na4.smartcommunications.cloud/one/api/cms/v4/versions/158086330/content',
+    method: 'GET'
 
 };
 
@@ -52,7 +54,7 @@ request({
     form: request_data.data,
     headers: oauth.toHeader(oauth.authorize(request_data))
 }, function(error, response, body) {
-   if (error) console.error(error);
+    if (error) console.error(error);
 		speech = body;
 		console.log(body);
 	return res.json({
@@ -61,7 +63,7 @@ request({
         source: 'webhook-echo-sample'
 	
 	});		
-});
+    });
 	}
 	else{
 	
@@ -73,7 +75,8 @@ request({
         displayText: speech,
         source: 'webhook-echo-sample'
     });
-}
+	}
+});
 restService.listen((process.env.PORT || 8000), function() {
     console.log("Server up and listening");
 });
