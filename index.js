@@ -88,6 +88,7 @@ restService.post('/echo', function(req, res) {
 		{	
 			apiMethod="GenerateDocument";
 			req_url="https://localhost/smartcomms/oauth1/api/v4/job/generateDocument?includeDocumentData=true";
+			console.log("Inside Generate Document URL"+req_url);
 			var transactionData=transactionDataPart1+transactionDataPart2+transactionDataPart3+transactionDataPart4+transactionDataPart5;
 			var bytes = utf8.encode(transactionData);
 			var encodedTransactionData= base64.encode(bytes);
