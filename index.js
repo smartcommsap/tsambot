@@ -56,6 +56,7 @@ restService.post('/echo', function(req, res) {
 					"parentId": req.body.result.parameters.ParentID
 					};
 	}
+	/**
 	//Parameters for Generate Document
 	else if(req.body.result.parameters.DocNumber)
 	{
@@ -110,6 +111,7 @@ restService.post('/echo', function(req, res) {
 		}
 		
 	}
+	**/
 	else
 	{
 		data= {
