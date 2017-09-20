@@ -1,6 +1,6 @@
 'use strict';
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-
+console.log("start: " + new Date());
 const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
@@ -40,7 +40,9 @@ restService.post('/echo', function(req, res) {
     hash_function: function(base_string, key) {
       return crypto.createHmac('sha1', key).update(base_string).digest('base64');
     }
-	});	
+	});
+	
+	console.log("oauth start: " + new Date());
 
 	//Parameters for Create Folder
 	if(req.body.result.parameters.NewFolderName && req.body.result.parameters.ParentID)
@@ -113,6 +115,7 @@ var request_vars =  {
 	url: req_url,
 	method: req_method,	
 };
+console.log("Before request: " + new Date());
 request({
     url: req_url,
     method: req_method,
@@ -130,6 +133,7 @@ request({
 	});		
     });
 });
+console.log("after request: " + new Date());
 restService.listen((process.env.PORT || 8000), function() {
     console.log("Server up and listening");
 });
