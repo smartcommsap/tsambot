@@ -34,16 +34,14 @@ restService.post('/echo', function(req, res) {
   });
   
   var request_data = {
-    /**
     url: 'https://na4.smartcommunications.cloud/one/oauth1/cms/v4/folders',
+	//url: 'https://na4.smartcommunications.cloud/one/',
+	//url: 'https://na4.smartcommunications.cloud/one/',
     method: 'POST',
     data: {
       name: req.body.result.parameters.NewFolderName,
 	  parentId: req.body.result.parameters.ParentID
     },
-    **/
-	url: 'https://na4.smartcommunications.cloud/one/api/cms/v4/versions/158086330/content',
-    method: 'GET'
 
 };
 
@@ -54,15 +52,34 @@ request({
     form: request_data.data,
     headers: oauth.toHeader(oauth.authorize(request_data))
 }, function(error, response, body) {
-    if (error) console.error(error);
-		speech = body;
+    if (error){ 
+	    console.error(error);
+	    
+    }
+	else{
+		if(body)
+		{
+		var xml2js = require('xml2js');
+  		var parser = new xml2js.Parser();
+  		parser.parseString(body, function (err, result) {
+  		var locspeech = result['errorinfo']['msg'];
+  		if (locspeech)
+		{
+			speech=locspeech;
+		}		
+});
+		}
+		console.log("Final speech: "+speech);
 		console.log(body);
 	return res.json({
         speech: speech,
         displayText: speech,
         source: 'webhook-echo-sample'
 	
-	});		
+	});
+	}
+
+		
     });
 	}
 	else{
