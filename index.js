@@ -118,7 +118,7 @@ restService.post('/echo', function(req, res) {
 	  "rootElementName": "SCBOTRequest",
 	  "sampleData": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48U0NCT1RSZXF1ZXN0PjxQb2xpY3lOdW1iZXI+cG9sMTIzPC9Qb2xpY3lOdW1iZXI+PFBvbGljeVByZW1pdW0+MTIzLjQ1PC9Qb2xpY3lQcmVtaXVtPjxRdW90ZU51bWJlcj5xdW90ZTEyMzwvUXVvdGVOdW1iZXI+PFF1b3RlUHJlbWl1bT4zNDUuNDU8L1F1b3RlUHJlbWl1bT48Q3VzdG9tZXJOYW1lPkpvaG4gRG9lPC9DdXN0b21lck5hbWU+PEFnZW5jeU5hbWU+UlRHIENvbnN1bHRhbnRzPC9BZ2VuY3lOYW1lPjxBZ2VuY3lQaG9uZU5vPjEyMy01NjQtMjMyPC9BZ2VuY3lQaG9uZU5vPjwvU0NCT1RSZXF1ZXN0Pg=="
 		};
-	req_url="https://localhost/smartcomms/oauth1/api/v4/listMissingFields";
+	req_url="https://192.168.0.102/smartcomms/oauth1/api/v4/listMissingFields";
 	}
 console.log("Outside Generate Document POL URL"+req_url);
 var request_vars =  {	
