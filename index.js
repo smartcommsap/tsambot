@@ -64,23 +64,27 @@ restService.post('/echo', function(req, res) {
 		var transactionDataPart5="</Transactiontype></SCBOTRequest>";
 		if(req.body.result.parameters.DocNumber.toString().substr(0,2).toUpperCase()=="POL")
 		{
+			console.log("Inside Generate Document POL URL"+req_url);
 			transactionType="Policy";
 			transactionDataPart2="<PolicyNumber>"+req.body.result.parameters.DocNumber+"</PolicyNumber><PolicyPremium>123.45</PolicyPremium>";
 			transactionDataPart4=transactionType;
 		}
 		else if(req.body.result.parameters.DocNumber.toString().substr(0,2).toUpperCase()=="QUO")
 		{
+			console.log("Inside Generate Document QUO URL"+req_url);
 			transactionType="Quote";
 			transactionDataPart2="<QuoteNumber>"+req.body.result.parameters.DocNumber+"</QuoteNumber><QuotePremium>5643.34</QuotePremium>";
 			transactionDataPart4=transactionType;
 		}
 		else
 		{
+			console.log("Inside Generate Document NotSupported URL"+req_url);
 			transactionType="NotSupported";
 		}
 		//If transaction is not Policy/Quote
 		if(transactionType=="NotSupported")
 		{
+			console.log("Not Supported"+req_url);
 			speech="The format of the quote/policy number is invalid. Please share the correct details.";
 		}
 		//If transaction is Policy/Quote
@@ -102,6 +106,7 @@ restService.post('/echo', function(req, res) {
 		}
 		
 	}
+console.log("Outside Generate Document POL URL"+req_url);
 var request_vars =  {	
 	url: req_url,
 	method: req_method,	
