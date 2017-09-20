@@ -67,7 +67,7 @@ request({
 	}
 	else{
 	
-   var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.PolicyNumber ? req.body.result.parameters.PolicyNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
+   var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.DocNumber ? req.body.result.parameters.DocNumber+" is available but SC is not connected." : "Seems like some problem. Speak again."
 	
 	console.log("Final speech: "+speech);
     return res.json({
