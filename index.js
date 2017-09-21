@@ -70,7 +70,7 @@ request({
 	}
 	}
 	console.log(response.statusCode);
-	console.log(request.body);
+	//console.log(request.body);
 	console.log(request_data.url.substr(0,4));
 	return res.json({
         speech: speechText,
@@ -132,7 +132,7 @@ request({
 	}
 	}
 	console.log(response.statusCode);
-	console.log(request.body);
+	//console.log(request.body);
 	console.log(request_data.url.substr(0,4));
 	return res.json({
         speech: speechText,
