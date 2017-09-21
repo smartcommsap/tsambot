@@ -81,7 +81,7 @@ request({
 	
 });
 }
-else if (req.body.result.parameters.EmailId && req.body.result.parameters.FirstName && req.body.result.parameters.LastName && req.body.result.parameters.UserId && req.body.result.parameters.EmailId!="" && req.body.result.parameters.FirstName!="" && req.body.result.parameters.LastName!=""l && req.body.result.parameters.UserId!="")
+else if (req.body.result.parameters.EmailId && req.body.result.parameters.FirstName && req.body.result.parameters.LastName && req.body.result.parameters.UserId && req.body.result.parameters.EmailId!="" && req.body.result.parameters.FirstName!="" && req.body.result.parameters.LastName!="" && req.body.result.parameters.UserId!="")
 {
 	//Setting the Oauth1 authorization parameters
 	var oauth = new OAuth({
