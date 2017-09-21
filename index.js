@@ -21,10 +21,7 @@ restService.use(bodyParser.json());
 
 restService.post('/echo', function(req, res) {
 	
-	var speechText="Some response from Smart Comms, Please try again later.";
-
-	if(req.body.result.parameters.NewFolderName && req.body.result.parameters.ParentID && req.body.result.parameters.ParentID!="" && req.body.result.parameters.NewFolderName!="" )
-	{
+	var speechText="No response from Smart Comms, Please contact your administrator.";
 	
 	//Setting the Oauth1 authorization parameters
 	var oauth = new OAuth({
@@ -36,6 +33,10 @@ restService.post('/echo', function(req, res) {
       return crypto.createHmac('sha1', key).update(base_string).digest('base64');
     }
 	});
+
+	if(req.body.result.parameters.NewFolderName && req.body.result.parameters.ParentID && req.body.result.parameters.ParentID!="" && req.body.result.parameters.NewFolderName!="" )
+	{	
+		console.log("inside folder creation");
 	
 var request_data = {
 	url: 'https://na4.smartcommunications.cloud/one/api/cms/v4/folders',
@@ -83,21 +84,10 @@ request({
 }
 else if (req.body.result.parameters.EmailId && req.body.result.parameters.FirstName && req.body.result.parameters.LastName && req.body.result.parameters.UserId && req.body.result.parameters.EmailId!="" && req.body.result.parameters.FirstName!="" && req.body.result.parameters.LastName!="" && req.body.result.parameters.UserId!="")
 {
-	var speechText ="Cannot perform operation";
+	//var speechText ="Cannot perform operation";
 	console.log("inside user creation");
-	//Setting the Oauth1 authorization parameters
-	var oauth = new OAuth({
-    consumer: {
-      key: '6e83adcc-09b3-4514-bb4f-442cfa21c019!TradeDocsThunderhead@sapient.com.trial',
-      secret: 'ab97a83f-bc76-4784-a559-bac258fb7dde'
-    },signature_method: 'HMAC-SHA1',
-    hash_function: function(base_string, key) {
-      return crypto.createHmac('sha1', key).update(base_string).digest('base64');
-    }
-	});
 	
-
-var request_vars =  {	
+	var request_vars =  {	
 	url: 'https://na4.smartcommunications.cloud/one/oauth1/userManagement/v4/users',
 	method: 'POST',	
 };
