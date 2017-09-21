@@ -100,7 +100,7 @@ var request_data = {
 	url: 'https://na4.smartcommunications.cloud/one/oauth1/userManagement/v4/users',
     method: 'POST',
 	data: {
-		"userId": req.body.result.parameters.UserId +"@sapient.com.trial",
+		"userId": req.body.result.parameters.UserId.toString() +"@sapient.com.trial",
 		"authType": "AD",
 		"emailAddress": req.body.result.parameters.EmailId,
 		"forename": req.body.result.parameters.FirstName,
@@ -137,7 +137,7 @@ request({
 	}
 	}
 	**/
-	console.log(response.body);
+	console.log(response);
 	//console.log(request.body);
 	console.log(request_data.url.substr(0,4));
 	return res.json({
