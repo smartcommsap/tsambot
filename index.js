@@ -64,12 +64,8 @@ request({
 		if(body){
 		var parseString = require('xml2js').parseString;
 		parseString(response.body, function (err, result) {
-		if(result)
-			{
 		console.dir(result.errorinfo.msg);
 		speechText=result.errorinfo.msg.toString();
-			}
-		});
 		});
 	}
 	}
@@ -130,13 +126,9 @@ request({
 		if(body){
 		var parseString = require('xml2js').parseString;
 		parseString(response.body, function (err, result) {
-			if(result)
-			{
 		console.dir(result.errorinfo.msg);
 		speechText=result.errorinfo.msg.toString();
-		}
 		});
-		
 	}
 	}
 	console.log(response.statusCode);
