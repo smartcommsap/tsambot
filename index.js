@@ -83,6 +83,8 @@ request({
 }
 else if (req.body.result.parameters.EmailId && req.body.result.parameters.FirstName && req.body.result.parameters.LastName && req.body.result.parameters.UserId && req.body.result.parameters.EmailId!="" && req.body.result.parameters.FirstName!="" && req.body.result.parameters.LastName!="" && req.body.result.parameters.UserId!="")
 {
+	var speechText ="Cannot perform operation";
+	console.log("inside user creation");
 	//Setting the Oauth1 authorization parameters
 	var oauth = new OAuth({
     consumer: {
@@ -115,7 +117,7 @@ request({
     form: request_data.data,
     headers: oauth.toHeader(oauth.authorize(request_data))
 }, function(error, response, body) {
-	var speechText="";
+	//var speechText="";
     if (error) console.log(error);
 	if(response.statusCode=='201')
 	{
@@ -126,8 +128,10 @@ request({
 		if(body){
 		var parseString = require('xml2js').parseString;
 		parseString(response.body, function (err, result) {
+			if(result){
 		console.dir(result.errorinfo.msg);
 		speechText=result.errorinfo.msg.toString();
+			}
 		});
 	}
 	}
