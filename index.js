@@ -1,18 +1,81 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const bodyParser = require('body-parser');
+const restService = express();
+restService.set('port', (process.env.PORT || 8000));
+var request = require('request');
 
-app.set('port', (process.env.PORT || 5000));
+//Added for Oauth1 authorization
+var OAuth = require('oauth-1.0a');
+var crypto = require('crypto');
 
-app.use(express.static(__dirname + '/public'));
 
-// views is directory for all template files
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
+//For base64 utf-8 Encoding/Decoding
+var base64 = require('base-64');
+var utf8 = require('utf8'); 
 
-app.get('/', function(request, response) {
-  response.render('pages/index');
+restService.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+restService.use(bodyParser.json());
+
+restService.post('/echo', function(req, res) {
+	
+	//Setting the Oauth1 authorization parameters
+	var oauth = new OAuth({
+    consumer: {
+      key: '6e83adcc-09b3-4514-bb4f-442cfa21c019!TradeDocsThunderhead@sapient.com.trial',
+      secret: 'ab97a83f-bc76-4784-a559-bac258fb7dde'
+    },signature_method: 'HMAC-SHA1',
+    hash_function: function(base_string, key) {
+      return crypto.createHmac('sha1', key).update(base_string).digest('base64');
+    }
+	});
+	
+var request_data = {
+	url: 'https://na4.smartcommunications.cloud/one/api/cms/v4/folders',
+    method: 'POST',
+	data: {
+      name: req.body.result.parameters.NewFolderName,
+	  parentId: req.body.result.parameters.ParentID  
+    },
+	
+};
+
+request({
+    url: request_data.url,
+    method: request_data.method,
+    form: request_data.data,
+    headers: oauth.toHeader(oauth.authorize(request_data))
+}, function(error, response, body) {
+	var speechText="";
+    if (error) console.log(error);
+	if(response.statusCode=='201')
+	{
+		speechText="Folder created";
+	}
+	else
+	{
+		if(body){
+		var parseString = require('xml2js').parseString;
+		parseString(response.body, function (err, result) {
+		console.dir(result.errorinfo.msg);
+		speechText=result.errorinfo.msg.toString();
+		});
+	}
+	}
+	console.log(response.statusCode);
+	console.log(request.body);
+	console.log(request_data.url.substr(0,4));
+	return res.json({
+        speech: speechText,
+        displayText: speechText,
+        source: 'webhook-echo-sample'
+	
+	});
+	
 });
-
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+});
+restService.listen(restService.get('port'), function() {
+  console.log('Node app is running on port', restService.get('port'));
 });
