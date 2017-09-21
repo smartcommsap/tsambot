@@ -138,8 +138,7 @@ request({
 	}
 	
 	console.log(response.body);
-	//console.log(request.body);
-	console.log(request_data.url.substr(0,4));
+	
 	return res.json({
         speech: speechText,
         displayText: speechText,
