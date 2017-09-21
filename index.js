@@ -123,6 +123,7 @@ request({
 	{
 		speechText="User created: "+req.body.result.parameters.UserId +"@sapient.com.trial";
 	}
+	/**
 	else
 	{
 		if(body){
@@ -135,7 +136,8 @@ request({
 		});
 	}
 	}
-	console.log(response.statusCode);
+	**/
+	console.log(response.body);
 	//console.log(request.body);
 	console.log(request_data.url.substr(0,4));
 	return res.json({
