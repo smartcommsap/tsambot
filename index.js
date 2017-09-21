@@ -96,26 +96,27 @@ else if (req.body.result.parameters.EmailId && req.body.result.parameters.FirstN
     }
 	});
 	
-var request_data = {
+
+var request_vars =  {	
 	url: 'https://na4.smartcommunications.cloud/one/oauth1/userManagement/v4/users',
-    method: 'POST',
-	data: {
+	method: 'POST',	
+};
+	
+var data= {      
 		"userId": req.body.result.parameters.UserId.toString() +"@sapient.com.trial",
 		"authType": "AD",
 		"emailAddress": req.body.result.parameters.EmailId,
 		"forename": req.body.result.parameters.FirstName,
 		"surname": req.body.result.parameters.LastName,
 		"groupNames": ["Default Group"],
-		"roleIds": [1, 6]  
-    },
-	
-};
+		"roleIds": [1, 6]  	
+	};
 
 request({
-    url: request_data.url,
-    method: request_data.method,
-    form: request_data.data,
-    headers: oauth.toHeader(oauth.authorize(request_data))
+    url: request_vars.url,
+    method: request_vars.method,
+    json: data,
+    headers: oauth.toHeader(oauth.authorize(request_vars))
 }, function(error, response, body) {
 	//var speechText="";
     if (error) console.log(error);
@@ -123,7 +124,6 @@ request({
 	{
 		speechText="User created: "+req.body.result.parameters.UserId +"@sapient.com.trial";
 	}
-	/**
 	else
 	{
 		if(body){
@@ -136,8 +136,8 @@ request({
 		});
 	}
 	}
-	**/
-	console.log(response);
+	
+	console.log(response.body);
 	//console.log(request.body);
 	console.log(request_data.url.substr(0,4));
 	return res.json({
