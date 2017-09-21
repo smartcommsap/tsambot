@@ -102,6 +102,7 @@ var request_vars =  {
 	method: 'POST',	
 };
 var userId= req.body.result.parameters.UserId+"@sapient.com.trial";
+console.log(userId);
 var data= {      
 		"userId": userId,
 		"authType": "AD",
