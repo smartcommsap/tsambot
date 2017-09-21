@@ -103,6 +103,9 @@ var request_vars =  {
 };
 var userId= req.body.result.parameters.UserId+"@sapient.com.trial";
 console.log(userId);
+console.log(req.body.result.parameters.EmailId);
+console.log(req.body.result.parameters.FirstName);
+console.log(req.body.result.parameters.LastName);
 var data= {      
 		"userId": userId,
 		"authType": "AD",
