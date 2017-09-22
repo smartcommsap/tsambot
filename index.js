@@ -144,6 +144,171 @@ request({
 
 
 }
+else if(req.body.result.parameters.DocNumber && req.body.result.parameters.DocNumber!="")
+{
+var xmldom = require('xmldom').DOMParser;
+var S = require('string');
+
+//Sample Data value
+var premium="1234.56";
+var agencyName="RTG Consultants";
+var agencyPhoneNo="123-564-232";
+
+//reset for every new echo
+var resourceVersionId="";
+var transactionType="";
+var docNumber="";
+var finalText="";
+
+var docNumberTest=req.body.result.parameters.DocNumber;
+
+var docType=docNumberTest.toString().substr(0,3).toUpperCase();
+console.log("docType: "+docType);
+
+if(docType=="POL" || docType=="QUO")
+{
+	var resourceId="157761703";
+	docNumber=docNumberTest; //Replace here
+	if(docType=="POL")
+	{
+		transactionType="policy";
+	}
+	else
+	{
+		transactionType="quote";
+	}
+	
+
+var oauth = new OAuth({
+    consumer: {
+      key: '6e83adcc-09b3-4514-bb4f-442cfa21c019!pnath2@sapient.com.trial',
+      secret: 'ab97a83f-bc76-4784-a559-bac258fb7dde'
+    },signature_method: 'HMAC-SHA1',
+    hash_function: function(base_string, key) {
+      return crypto.createHmac('sha1', key).update(base_string).digest('base64');
+    }
+  });
+
+//Code to retrieve latest resource version id -- starts
+console.log("retrieve latest resource version id");
+var request_vars =  {
+		
+	url: "https://na4.smartcommunications.cloud/one/api/cms/v4/resources/"+resourceId+"/latestversion?scope=-1",
+	method: 'GET',	
+};
+
+request({
+    url: request_vars.url,
+    method: request_vars.method,
+    headers: oauth.toHeader(oauth.authorize(request_vars))
+}, function(error, response, body) {
+    if (error) console.log(error);
+	if(body)
+	{
+		console.log(body);
+		var doc = new xmldom().parseFromString(body);
+		if(doc)
+		{
+		var resourceVersionIdFromXML = doc.getElementsByTagName('resVerId');
+		console.log("resourceVersionId fetched: "+resourceVersionIdFromXML[0].textContent);
+		resourceVersionId=resourceVersionIdFromXML[0].textContent;
+		console.log("resourceVersionId fetched inside: "+resourceVersionId);
+		}
+		else
+		{
+			speechText="There is some issue in retrieving the content data. Please check with the admin."
+		}
+	}
+console.log("resourceVersionId fetched req: "+resourceVersionId);
+//Code to getContent for resourceVersionId -- starts
+console.log("getContent for resourceVersionId");
+var request_vars2 =  {
+		
+	url: "https://na4.smartcommunications.cloud/one/api/cms/v4/versions/"+resourceVersionId+"/content",
+	method: 'GET',	
+};
+console.log(request_vars2.url);
+request({
+    url: request_vars2.url,
+    method: request_vars2.method,
+    headers: oauth.toHeader(oauth.authorize(request_vars2))
+}, function(error, response, body) {
+    if (error) console.log(error);
+	if(body)
+	{
+		console.log(body);
+		var doc = new xmldom().parseFromString(body);
+		if(doc)
+		{
+		var fetchAllParaText = doc.getElementsByTagName('p');
+		for(var i in fetchAllParaText)
+	{
+		if(fetchAllParaText[i].textContent || fetchAllParaText[i].textContent=="")
+		{
+			if(fetchAllParaText[i].textContent=="")
+			{
+				finalText=finalText+"\n\n";
+			}
+			else{
+			finalText=finalText+fetchAllParaText[i].textContent;
+			}
+		//console.log(fetchAllParaText[i].textContent);
+		}
+	}
+	
+	speechText=finalText;
+	speechText=S(speechText).replaceAll("<TransactionType>", transactionType).toString();
+	speechText=S(speechText).replaceAll("<DocNumber>", docNumber).toString();
+	speechText=S(speechText).replaceAll("<Premium>", premium).toString();
+	speechText=S(speechText).replaceAll("<AgencyName>", agencyName).toString();
+	speechText=S(speechText).replaceAll("<AgencyPhoneNo>", agencyPhoneNo).toString();
+	console.log(speechText);
+	
+		return res.json({
+        speech: speechText,
+        displayText: speechText,
+        source: 'webhook-echo-sample'
+	
+	});
+	
+		}
+		else
+		{
+			speechText="Faced some internal issue. Please check with your admin.";
+			return res.json({
+			speech: speechText,
+			displayText: speechText,
+			source: 'webhook-echo-sample'
+		}
+	}
+});
+
+//Code to getContent for resourceVersionId -- ends
+});
+//Code to retrieve latest resource version id -- ends
+
+
+
+}
+else
+{			speechText="The details provided are not valid for any existing policy/quote.";
+			return res.json({
+			speech: speechText,
+			displayText: speechText,
+			source: 'webhook-echo-sample'
+			//Set Speech Text here for non POL/QUO
+}
+
+}
+else
+{
+			speechText="Cannot perform any operation, please try again.";
+			return res.json({
+			speech: speechText,
+			displayText: speechText,
+			source: 'webhook-echo-sample'
+	//final
+}
 });
 restService.listen(restService.get('port'), function() {
   console.log('Node app is running on port', restService.get('port'));
