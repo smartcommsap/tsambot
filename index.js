@@ -308,7 +308,7 @@ else
 }
 else if(req.body.result.parameters.GroupName && req.body.result.parameters.GroupName!="")
 {
-var finalText="The users who are part of the" + req.body.result.parameters.GroupName +" are";
+var finalText="The users who are part of the " + req.body.result.parameters.GroupName +" are";
 var groupName=req.body.result.parameters.GroupName;
 var url = "https://na4.smartcommunications.cloud/one/oauth1/userManagement/v4/groups/"+groupName+"?withUserIds=true";
 var encodedURL = encodeUrl(url);
