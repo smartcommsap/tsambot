@@ -279,8 +279,7 @@ request({
 			speech: speechText,
 			displayText: speechText,
 			source: 'webhook-echo-sample'
-		}
-	}
+		});
 	}
 });
 
