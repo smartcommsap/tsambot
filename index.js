@@ -312,6 +312,7 @@ else
 	//final
 });
 }
+});
 restService.listen(restService.get('port'), function() {
   console.log('Node app is running on port', restService.get('port'));
 });
