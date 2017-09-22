@@ -301,6 +301,7 @@ else
 });
 
 }
+}
 else
 {
 			speechText="Cannot perform any operation, please try again.";
