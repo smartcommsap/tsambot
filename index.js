@@ -3,6 +3,11 @@ const bodyParser = require('body-parser');
 const restService = express();
 restService.set('port', (process.env.PORT || 8000));
 var request = require('request');
+var xmldom = require('xmldom').DOMParser;
+var S = require('string');
+
+var encodeUrl = require('encodeurl');
+const jsxml = require("node-jsxml");
 
 //Added for Oauth1 authorization
 var OAuth = require('oauth-1.0a');
@@ -146,8 +151,7 @@ request({
 }
 else if(req.body.result.parameters.DocNumber && req.body.result.parameters.DocNumber!="")
 {
-var xmldom = require('xmldom').DOMParser;
-var S = require('string');
+
 
 //Sample Data value
 var premium="1234.56";
@@ -301,6 +305,85 @@ else
 });
 
 }
+}
+else if(req.body.result.parameters.GroupName && req.body.result.parameters.GroupName!="")
+{
+var groupName=req.body.result.parameters.GroupName;
+var url = "https://na4.smartcommunications.cloud/one/oauth1/userManagement/v4/groups/"+groupName+"?withUserIds=true";
+var encodedURL = encodeUrl(url);
+console.log(encodedURL);
+var request_vars =  {
+		
+	url: encodedURL,
+	method: 'GET'
+};
+
+request({
+    url: request_vars.url,
+    method: request_vars.method,
+    headers: oauth.toHeader(oauth.authorize(request_vars))
+}, function(error, response, body) {
+    if (error) console.log(error);
+	//console.log(response);
+	if(response.statusCode=='200')
+	{
+	if(body)
+	{
+		var doc = new xmldom().parseFromString(body);
+		if(doc)
+		{
+		var fetchAllUserIds = doc.getElementsByTagName('userId');
+		console.log("length: "+fetchAllUserIds.length);
+		for(var i in fetchAllUserIds)
+	{
+		if(fetchAllUserIds[i].textContent)
+		{
+			
+			finalText=finalText+"\n"+fetchAllUserIds[i].textContent;
+		}
+	}
+	
+	speechText=finalText;
+	
+	
+		return res.json({
+        speech: speechText,
+        displayText: speechText,
+        source: 'webhook-echo-sample'
+	
+	});
+	
+		}
+		else
+		{
+			speechText="Faced some internal issue. Please check with your admin.";
+			
+			return res.json({
+			speech: speechText,
+			displayText: speechText,
+			source: 'webhook-echo-sample'
+		});
+		
+	}
+	}
+	}
+	else
+	{
+		if(body){
+		var parseString = require('xml2js').parseString;
+		parseString(response.body, function (err, result) {
+		console.dir(result.errorinfo.msg);
+		speechText=result.errorinfo.msg.toString();
+		return res.json({
+			speech: speechText,
+			displayText: speechText,
+			source: 'webhook-echo-sample'
+		});
+		});
+	}
+	}
+	console.log(speechText);
+	});
 }
 else
 {
