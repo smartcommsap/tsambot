@@ -281,6 +281,7 @@ request({
 			source: 'webhook-echo-sample'
 		});
 	}
+	}
 });
 
 //Code to getContent for resourceVersionId -- ends
