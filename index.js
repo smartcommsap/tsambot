@@ -47,6 +47,7 @@ restService.post('/echo', function(req, res) {
         speech: speechText,
         displayText: speechText,
         source: 'webhook-echo-sample'
+		});
 	}
 	else if(req.body.result.parameters.NewFolderName && req.body.result.parameters.ParentID && req.body.result.parameters.ParentID!="" && req.body.result.parameters.NewFolderName!="" )
 	{	
