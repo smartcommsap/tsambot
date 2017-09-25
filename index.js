@@ -39,7 +39,7 @@ restService.post('/echo', function(req, res) {
     }
 	});
 
-	if(req.body.result.parameters.WakeUp)
+	if(req.body.result.parameters.WakeUp && req.body.result.parameters.WakeUp.toString().toUpperCase()=="WAKE UP")
 	{
 		speechText="I am awake. My name is SmartBOT. How may I help you?";		
 		
