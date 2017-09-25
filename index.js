@@ -39,7 +39,16 @@ restService.post('/echo', function(req, res) {
     }
 	});
 
-	if(req.body.result.parameters.NewFolderName && req.body.result.parameters.ParentID && req.body.result.parameters.ParentID!="" && req.body.result.parameters.NewFolderName!="" )
+	if(req.body.result.parameters.WakeUp && req.body.result.parameters.WakeUp.toString().toUpperCase()=="WAKE UP")
+	{
+		speechText="I am awake. My name is SmartBOT. How may I help you?";		
+		
+		return res.json({
+        speech: speechText,
+        displayText: speechText,
+        source: 'webhook-echo-sample'
+	}
+	else if(req.body.result.parameters.NewFolderName && req.body.result.parameters.ParentID && req.body.result.parameters.ParentID!="" && req.body.result.parameters.NewFolderName!="" )
 	{	
 		console.log("inside folder creation");
 	
