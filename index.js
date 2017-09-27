@@ -195,6 +195,7 @@ var age="";
 		resourceId="157762557";
 		vehicle1=req.body.result.parameters.Vehicle1;
 		vehicle2=req.body.result.parameters.Vehicle2;
+		console.log("Confirm Details: "+req.body.result.parameters.ConfirmDetails.toString().toUpperCase);
 	}
 	else
 	{
