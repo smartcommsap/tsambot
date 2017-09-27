@@ -180,7 +180,7 @@ var age="";
 	}
 	else if(requestType.toString()=="premiumfornewdriver" && req.body.result.parameters.Age.amount && req.body.result.parameters.Age.amount!="")
 	{
-		if(req.body.result.parameters.Age.amount>21)
+		if(req.body.result.parameters.Age.amount<21)
 		{
 			resourceId="157762939";
 		}
