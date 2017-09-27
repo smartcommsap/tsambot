@@ -190,19 +190,27 @@ var age="";
 		}
 		age=req.body.result.parameters.Age.amount.toString()+" year old";
 	}
-	else if(requestType.toString()=="newpremiumforvehicle" && req.body.result.parameters.ConfirmDetails.toString().toUpperCase=="Y")
+	else if(requestType.toString()=="newpremiumforvehicle")
 	{
-		resourceId="157762557";
-		vehicle1=req.body.result.parameters.Vehicle1;
-		vehicle2=req.body.result.parameters.Vehicle2;
-		console.log("Confirm Details: "+req.body.result.parameters.ConfirmDetails.toString().toUpperCase);
+		if(req.body.result.parameters.ConfirmDetails.toString().toUpperCase()=="Y")
+		
+		{
+			resourceId="157762557";
+			vehicle1=req.body.result.parameters.Vehicle1;
+			vehicle2=req.body.result.parameters.Vehicle2;
+		}
+		else
+		{
+			speechText="Either you did not wish to continue further or we could not find the response for your request. Please try again or contact the support team."
+		}
 	}
 	else
 	{
 		speechText="Either you did not wish to continue further or we could not find the response for your request. Please try again or contact the support team."
 	}
 
-	console.log("Confirm Details: "+req.body.result.parameters.ConfirmDetails.toString().toUpperCase);
+if(if(req.body.result.parameters.ConfirmDetails.toString().toUpperCase()!="Y"))
+{
 //Code to retrieve latest resource version id -- starts
 console.log("retrieve latest resource version id");
 var request_vars =  {
@@ -302,7 +310,6 @@ request({
 	}
 	else
 	{
-			speechText="Faced some internal issue. Please check with your admin.";
 			return res.json({
 			speech: speechText,
 			displayText: speechText,
@@ -315,7 +322,16 @@ request({
 });
 //Code to retrieve latest resource version id -- ends
 
-
+}
+else
+{
+			speechText="Faced some internal issue. Please check with your admin.";
+			return res.json({
+			speech: speechText,
+			displayText: speechText,
+			source: 'webhook-echo-sample'
+		});
+}
 
 
 }
