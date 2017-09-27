@@ -26,6 +26,17 @@ restService.post('/echo', function(req, res) {
 	
 	var speechText="No response from Smart Comms, Please contact your administrator.";
 	
+	if(req.body.result.parameters.RequestType && req.body.result.parameters.RequestType=="wakeup")
+	{
+		speechText="Smarty is awake and at your service. How can I help you?";
+		return res.json({
+        speech: speechText,
+        displayText: speechText,
+        source: 'webhook-echo-sample'
+	
+		});
+	}
+	
 	//Setting the Oauth1 authorization parameters
 	var oauth = new OAuth({
     consumer: {
