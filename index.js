@@ -209,7 +209,7 @@ var request_vars =  {
 	url: "https://na4.smartcommunications.cloud/one/api/cms/v4/resources/"+resourceId+"/latestversion?scope=-1",
 	method: 'GET',	
 };
-
+console.log("Url to retrieve: "+request_vars.url);
 request({
     url: request_vars.url,
     method: request_vars.method,
