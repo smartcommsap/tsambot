@@ -209,7 +209,7 @@ var age="";
 		speechText="Either you did not wish to continue further or we could not find the response for your request. Please try again or contact the support team."
 	}
 
-if(if(req.body.result.parameters.ConfirmDetails.toString().toUpperCase()!="Y"))
+if(req.body.result.parameters.ConfirmDetails.toString().toUpperCase()!="Y")
 {
 //Code to retrieve latest resource version id -- starts
 console.log("retrieve latest resource version id");
