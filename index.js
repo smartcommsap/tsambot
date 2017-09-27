@@ -325,7 +325,7 @@ request({
 }
 else
 {
-			speechText="Faced some internal issue. Please check with your admin.";
+			//speechText="Faced some internal issue. Please check with your admin.";
 			return res.json({
 			speech: speechText,
 			displayText: speechText,
