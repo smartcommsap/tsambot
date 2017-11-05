@@ -12,16 +12,20 @@ restService.use(bodyParser.json());
 
 restService.post('/echo', function(req, res) {
 	
-	var speechText="No response, Please contact your administrator.";
+	var speechText="No response, please contact your administrator.";
 	
-	if(req.body.result.parameters.RequestType && req.body.result.parameters.RequestType=="wakeup")
+	if(req.body.result.parameters.requestType && req.body.result.parameters.requestType=="wakeup")
 	{
 		speechText="Boty is awake and at your service. How can I help you?";
 		return res.json({
         speech: speechText,
         displayText: speechText,
-        source: 'response for wakeup'
+        source: 'webhook-echo-sample'
 	
 		});
 	}
+	
+});
+restService.listen(restService.get('port'), function() {
+  console.log('Node app is running on port', restService.get('port'));
 });
