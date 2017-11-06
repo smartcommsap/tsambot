@@ -12,7 +12,7 @@ restService.use(bodyParser.json());
 
 restService.post('/echo', function(req, res) {
 	
-	var speechText="No response, please contact your administrator.";
+	var speechText="No response. Please retry and please your administrator if the issue persists.";
 	
 	if(req.body.result.parameters.requestType && req.body.result.parameters.requestType=="wakeup")
 	{
@@ -20,9 +20,18 @@ restService.post('/echo', function(req, res) {
 		return res.json({
         speech: speechText,
         displayText: speechText,
-        source: 'webhook-echo-sample'
+        source: 'response for wakeup'
 	
 		});
+	}
+	else
+	{
+		return res.json({
+        speech: speechText,
+        displayText: speechText,
+        source: 'default response from webhook'	
+		});
+	
 	}
 	
 });
