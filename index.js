@@ -56,7 +56,7 @@ restService.post('/echo', function(req, res) {
 		//Sample data value
 		var stockRating="Equal-weight";
 		var targetPrice="456";
-		var stock="req.body.result.parameters.Stock";
+		var stock=req.body.result.parameters.stock;
 		
 		if(req.body.result.parameters.requestType=="queryForDeck")
 		{
