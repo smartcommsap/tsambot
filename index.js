@@ -47,11 +47,29 @@ restService.post('/echo', function(req, res) {
 	
 		});
 	}
-	else if(req.body.result.parameters.requestType && req.body.result.parameters.requestType=="queryForDeck")
+	if(req.body.result.parameters.requestType && req.body.result.parameters.requestType!="")
 	{
-		var resourceId="157773560";
+		var resourceId="";
 		var resourceVersionId="";
 		var finalText="";
+		
+		//Sample data value
+		var stockRating="Equal-weight";
+		var targetPrice="456";
+		var stock="req.body.result.parameters.Stock";
+		
+		if(req.body.result.parameters.requestType=="queryForDeck")
+		{
+			resourceId="157773560";
+		}
+		else if(req.body.result.parameters.requestType=="queryForRating")
+		{
+			resourceId="157773715";
+		}
+		else if(req.body.result.parameters.requestType=="queryForPrice")
+		{
+			resourceId="157773716";
+		}
 		
 		//Code to retrieve latest resource version id -- starts
 		console.log("retrieve latest resource version id");
@@ -121,6 +139,9 @@ restService.post('/echo', function(req, res) {
 			}
 			
 			speechText=finalText;
+			speechText=S(speechText).replaceAll("<Price>", targetPrice).toString();
+			speechText=S(speechText).replaceAll("<Rating>", stockRating).toString();
+			speechText=S(speechText).replaceAll("<Stock>", stock).toString();
 			console.log(speechText);
 			
 				return res.json({
